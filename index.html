@@ -5,19 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Future Founders | Universidad Continental</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:ital,wght@1,700&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Merriweather:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@1,700&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
     
     <style>
         /* =========================================
-           VARIABLES GLOBALES
+           VARIABLES GLOBALES (PALETA ACTUALIZADA)
            ========================================= */
         :root {
-            --bg-color: #050505;
-            --text-color: #ffffff;
-            --text-muted: #a1a1aa;
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --accent: #3b82f6; /* Azul tecnológico */
+            --bg-dark: #050505;
+            --bg-light: #ffffff;
+            
+            --text-dark: #111827; /* Texto para fondo claro */
+            --text-light: #f9fafb; /* Texto para fondo oscuro */
+            
+            --text-muted-dark: #4b5563;
+            --text-muted-light: #9ca3af;
+            
+            --accent-blue: #0a2540; /* Azul oscuro corporativo */
+            --accent-blue-light: #1e3a8a;
+            
+            /* Énfasis solicitado: Sombra azul oscuro */
+            --shadow-emphasis: 0 12px 28px rgba(10, 37, 64, 0.15);
+            --shadow-emphasis-dark: 0 12px 28px rgba(30, 58, 138, 0.4);
         }
 
         /* =========================================
@@ -30,11 +39,15 @@
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
             overflow-x: hidden;
+        }
+
+        /* Tipografía editorial para títulos */
+        h1, h2, h3, h4 {
+            font-family: 'Merriweather', serif;
+            font-weight: 700;
         }
 
         .container {
@@ -48,35 +61,63 @@
         }
 
         .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 40px;
-            font-weight: 700;
+            font-size: 2.8rem;
+            margin-bottom: 50px;
+            text-align: center;
         }
 
-        .text-center { 
-            text-align: center; 
+        .text-center { text-align: center; }
+
+        /* =========================================
+           CLASES DE FONDOS INTERCALADOS
+           ========================================= */
+        .bg-light {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+        }
+
+        .bg-dark {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
         }
 
         /* =========================================
-           EFECTO GLASSMORPHISM
+           TARJETAS Y ÉNFASIS AZUL OSCURO
            ========================================= */
-        .glass-card {
-            background: var(--glass-bg);
+        .card {
+            border-radius: 16px;
+            padding: 40px 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+
+        /* Tarjeta en fondo claro (Blanco con sombra azul) */
+        .bg-light .card {
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            box-shadow: var(--shadow-emphasis);
+        }
+        .bg-light .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(10, 37, 64, 0.25);
+        }
+
+        /* Tarjeta en fondo oscuro (Glass oscuro con borde azul) */
+        .bg-dark .card {
+            background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 30px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 4px solid var(--accent-blue-light);
+            box-shadow: var(--shadow-emphasis-dark);
         }
-
-        .glass-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        .bg-dark .card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.05);
         }
 
         /* =========================================
-           HERO SECTION
+           HERO SECTION (IMAGEN DE STOCK)
            ========================================= */
         .hero {
             height: 100vh;
@@ -84,61 +125,87 @@
             align-items: center;
             justify-content: center;
             text-align: center;
+            color: var(--text-light);
+            /* Imagen de stock con overlay oscuro */
+            background: linear-gradient(rgba(5, 5, 5, 0.75), rgba(10, 37, 64, 0.6)), 
+                        url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            background-attachment: fixed; /* Efecto parallax suave */
         }
 
         .hero h1 {
-            font-size: 4rem;
+            font-size: 4.5rem;
             margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            font-weight: 400;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         #changing-text {
-            color: var(--accent);
+            color: #60a5fa; /* Azul claro para resaltar en el hero */
             transition: font-family 0.3s ease;
             display: inline-block;
-            min-width: 300px; /* Evita saltos de línea molestos */
+            min-width: 320px;
         }
 
         /* =========================================
            GRILLAS
            ========================================= */
-        .grid-4 {
+        .grid-team {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 30px;
+            justify-content: center;
         }
 
-        .grid-3 {
+        .grid-blog {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
         }
 
         /* =========================================
-           TARJETAS DE EQUIPO
+           TARJETAS DE EQUIPO (FOTOS CIRCULARES)
            ========================================= */
         .team-card {
             text-align: center;
         }
 
         .profile-img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 20px;
-            border: 2px solid var(--glass-border);
+            width: 130px;
+            height: 130px;
+            border-radius: 50%; /* Círculo perfecto */
+            object-fit: cover; /* Evita que la imagen se estire */
+            aspect-ratio: 1 / 1;
+            margin: 0 auto 25px auto;
+            display: block;
+            border: 4px solid var(--accent-blue); /* Borde azul oscuro */
+            box-shadow: var(--shadow-emphasis);
+        }
+
+        .team-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: var(--accent-blue);
         }
 
         .role {
-            color: var(--accent);
-            font-size: 0.9rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             margin-bottom: 15px;
-            font-weight: 700;
+            color: var(--text-muted-dark);
         }
 
         .desc {
-            color: var(--text-muted);
             font-size: 0.95rem;
+            color: var(--text-muted-dark);
         }
 
         /* =========================================
@@ -147,31 +214,30 @@
         .flex-split {
             display: flex;
             align-items: center;
-            gap: 50px;
+            gap: 60px;
         }
 
         .split-left, .split-right {
             flex: 1;
         }
 
-        .img-wrapper {
-            padding: 10px;
-        }
-
         .uni-img {
             width: 100%;
-            border-radius: 15px;
+            border-radius: 12px;
             display: block;
+            box-shadow: var(--shadow-emphasis-dark);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .uni-data {
-            margin-top: 20px;
+            margin-top: 25px;
             list-style-position: inside;
-            color: var(--text-muted);
+            color: var(--text-muted-light);
+            font-size: 1.1rem;
         }
 
         .uni-data li {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         /* =========================================
@@ -179,23 +245,26 @@
            ========================================= */
         .tag {
             display: inline-block;
-            padding: 4px 12px;
-            background: rgba(59, 130, 246, 0.15);
-            color: var(--accent);
-            border-radius: 20px;
-            font-size: 0.8rem;
-            margin-bottom: 15px;
-            font-weight: 700;
+            padding: 6px 14px;
+            background: var(--accent-blue);
+            color: #ffffff;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            font-weight: 600;
         }
 
         .blog-card h4 {
             margin-bottom: 15px;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
+            color: var(--accent-blue);
         }
 
         .blog-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
+            color: var(--text-muted-dark);
+            font-size: 1rem;
         }
 
         /* =========================================
@@ -211,39 +280,42 @@
 
         .cta-subtitle {
             margin-bottom: 40px;
-            color: var(--text-muted);
+            color: var(--text-muted-light);
+            font-size: 1.1rem;
         }
 
         input, textarea {
             width: 100%;
-            padding: 15px;
+            padding: 16px;
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--glass-border);
-            border-radius: 10px;
-            color: var(--text-color);
-            font-family: inherit;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: var(--text-light);
+            font-family: 'Inter', sans-serif;
             transition: border-color 0.3s ease;
         }
 
         input:focus, textarea:focus {
             outline: none;
-            border-color: var(--accent);
+            border-color: #60a5fa;
         }
 
         .btn-primary {
-            background: var(--text-color);
-            color: var(--bg-color);
-            padding: 15px;
+            background: var(--bg-light);
+            color: var(--accent-blue);
+            padding: 18px;
             border: none;
-            border-radius: 10px;
-            font-weight: bold;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
             cursor: pointer;
             transition: background 0.3s ease, transform 0.2s ease;
+            font-family: 'Inter', sans-serif;
         }
 
         .btn-primary:hover {
             background: #e4e4e7;
-            transform: scale(1.02);
+            transform: translateY(-2px);
         }
 
         /* =========================================
@@ -251,19 +323,19 @@
            ========================================= */
         footer {
             text-align: center;
-            padding: 30px;
-            border-top: 1px solid var(--glass-border);
-            color: var(--text-muted);
+            padding: 40px;
+            background-color: #000;
+            color: var(--text-muted-light);
             font-size: 0.9rem;
         }
 
         /* =========================================
-           ANIMACIONES SCROLL (CLASES JS)
+           ANIMACIONES SCROLL
            ========================================= */
         .fade-in {
             opacity: 0;
             transform: translateY(40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .fade-in.visible {
@@ -279,7 +351,10 @@
                 flex-direction: column;
             }
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
+            }
+            .section-title {
+                font-size: 2.2rem;
             }
             #changing-text {
                 min-width: auto;
@@ -289,112 +364,118 @@
 </head>
 <body>
 
-    <header class="hero section-padding">
-        <div class="hero-content fade-in">
+    <header class="hero">
+        <div class="container fade-in">
             <h1>Visión <span id="changing-text">Innovadora</span></h1>
-            <p>Transformando el futuro tecnológico desde cero.</p>
+            <p>Construyendo startups desde las aulas. Transformamos ideas en soluciones tecnológicas escalables con impacto real.</p>
         </div>
     </header>
 
-    <section id="equipo" class="section-padding">
+    <section id="equipo" class="section-padding bg-light">
         <div class="container fade-in">
-            <h2 class="section-title">Nuestro Equipo</h2>
-            <div class="grid-4">
+            <h2 class="section-title">Nuestro Equipo Fundador</h2>
+            
+            <div class="grid-team">
                 
-                <div class="glass-card team-card">
+                <div class="card team-card">
                     <img src="img/imagen-joaquin.png" alt="Ali Israel Astete Romero" class="profile-img">
                     <h3>Ali Israel Astete Romero</h3>
                     <p class="role">Estudiante U. Continental</p>
                     <p class="desc">Especialista en arquitecturas de backend y procesamiento de datos. Apasionado por la inteligencia artificial aplicada a los negocios.</p>
                 </div>
 
-                <div class="glass-card team-card">
+                <div class="card team-card">
                     <img src="img/imagen-joaquin.png" alt="Eliab Ezziel Zamalloa Cayo" class="profile-img">
                     <h3>Eliab Ezziel Zamalloa Cayo</h3>
                     <p class="role">Estudiante U. Continental</p>
                     <p class="desc">Desarrollador Full Stack con enfoque en ciberseguridad. Encargado de mantener la integridad y escalabilidad de los sistemas.</p>
                 </div>
 
-                <div class="glass-card team-card">
+                <div class="card team-card">
                     <img src="img/imagen-joaquin.png" alt="Terry Rolando Chauca" class="profile-img">
                     <h3>Terry Rolando Chauca</h3>
                     <p class="role">Estudiante U. Continental</p>
                     <p class="desc">Experto en UX/UI e interfaces modernas. Su misión es crear experiencias digitales intuitivas, minimalistas y altamente funcionales.</p>
                 </div>
 
-                <div class="glass-card team-card">
+                <div class="card team-card">
                     <img src="img/imagen-joaquin.png" alt="Ariana Molina" class="profile-img">
                     <h3>Ariana Molina</h3>
                     <p class="role">Estudiante U. Continental</p>
-                    <p class="desc">Gestora de proyectos ágiles y analista de mercado tecnológico. Coordina los esfuerzos del equipo para asegurar entregas de alto impacto.</p>
+                    <p class="desc">Gestora de proyectos ágiles y analista de mercado. Coordina los esfuerzos del equipo para asegurar entregas de alto impacto.</p>
+                </div>
+
+                <div class="card team-card">
+                    <img src="img/imagen-joaquin.png" alt="Joaquin Marcello Romero Rueda" class="profile-img">
+                    <h3>Joaquin Marcello Romero</h3>
+                    <p class="role">Estudiante U. Continental</p>
+                    <p class="desc">Líder de Producto e Innovación. Encargado de transformar requerimientos complejos en soluciones tecnológicas viables centradas en el usuario.</p>
                 </div>
 
             </div>
         </div>
     </section>
 
-    <section id="universidad" class="section-padding">
+    <section id="universidad" class="section-padding bg-dark">
         <div class="container flex-split fade-in">
             <div class="split-left">
-                <div class="glass-card img-wrapper">
-                    <img src="img/edificio-continental.jpg" alt="Universidad Continental" class="uni-img">
-                </div>
+                <img src="img/edificio-continental.jpg" alt="Universidad Continental" class="uni-img">
             </div>
             <div class="split-right">
-                <h2 class="section-title">Nuestra Casa de Estudios</h2>
-                <p>La <strong>Universidad Continental</strong> es el ecosistema donde nuestra visión cobró vida. A través de su enfoque en la innovación y el emprendimiento, hemos logrado consolidar nuestras ideas en proyectos tangibles.</p>
+                <h2 class="section-title" style="text-align: left;">Nuestra Casa de Estudios</h2>
+                <p>La <strong>Universidad Continental</strong> es el ecosistema donde nuestra visión cobró vida. A través de su enfoque en la innovación y el emprendimiento, hemos logrado consolidar nuestras ideas en proyectos tangibles de alto impacto.</p>
                 <ul class="uni-data">
                     <li>Sede central de nuestras operaciones académicas.</li>
-                    <li>Acceso a laboratorios de alta tecnología.</li>
-                    <li>Mentores y docentes de primer nivel.</li>
+                    <li>Acceso a laboratorios de alta tecnología e innovación.</li>
+                    <li>Respaldo de mentores y docentes de primer nivel.</li>
                 </ul>
             </div>
         </div>
     </section>
 
-    <section id="novedades" class="section-padding">
+    <section id="novedades" class="section-padding bg-light">
         <div class="container fade-in">
-            <h2 class="section-title">Novedades y Blog Tech</h2>
-            <div class="grid-3">
+            <h2 class="section-title">Publicaciones y Novedades</h2>
+            <div class="grid-blog">
                 
-                <div class="glass-card blog-card">
+                <article class="card blog-card">
                     <span class="tag">Desarrollo Web</span>
                     <h4>El impacto de Web3 en Startups</h4>
-                    <p>En nuestra última investigación, Ali y Terry exploran cómo la descentralización está cambiando el panorama de las aplicaciones corporativas.</p>
-                </div>
+                    <p>En nuestra última investigación, Ali y Terry exploran cómo la descentralización está cambiando el panorama de las aplicaciones corporativas desde la base.</p>
+                </article>
 
-                <div class="glass-card blog-card">
-                    <span class="tag">Ciberseguridad</span>
-                    <h4>Protegiendo datos en 2026</h4>
-                    <p>Eliab comparte las prácticas fundamentales que hemos implementado para asegurar nuestros despliegues en la nube frente a nuevas amenazas.</p>
-                </div>
+                <article class="card blog-card">
+                    <span class="tag">Innovación</span>
+                    <h4>Diseñando Productos Viables</h4>
+                    <p>Joaquín documenta nuestro proceso de ideación y cómo filtramos las ideas en el laboratorio para construir MVPs sólidos en tiempo récord.</p>
+                </article>
 
-                <div class="glass-card blog-card">
+                <article class="card blog-card">
                     <span class="tag">Gestión Ágil</span>
                     <h4>De la idea al MVP en 30 días</h4>
-                    <p>Ariana documenta nuestro proceso de trabajo utilizando metodologías ágiles adaptadas a entornos académicos de alta exigencia.</p>
-                </div>
+                    <p>Ariana y Eliab comparten la estructura de sprints que utilizamos, adaptando metodologías ágiles a entornos de alta exigencia académica.</p>
+                </article>
 
             </div>
         </div>
     </section>
 
-    <section id="contacto" class="section-padding">
+    <section id="contacto" class="section-padding bg-dark">
         <div class="container fade-in text-center">
-            <h2 class="section-title">Únete a nuestra visión</h2>
-            <p class="cta-subtitle">¿Tienes un proyecto en mente? Hablemos.</p>
+            <h2 class="section-title" style="margin-bottom: 10px;">Únete a nuestra visión</h2>
+            <p class="cta-subtitle">¿Tienes un proyecto en mente o buscas colaborar? Hablemos.</p>
             
-            <form class="glass-card form-cta" onsubmit="event.preventDefault(); alert('Mensaje enviado correctamente.');">
+            <form class="card form-cta" onsubmit="event.preventDefault(); alert('Mensaje enviado correctamente.');">
                 <input type="text" placeholder="Tu Nombre Completo" required>
                 <input type="email" placeholder="Correo Electrónico" required>
-                <textarea rows="4" placeholder="Cuéntanos tu idea" required></textarea>
+                <textarea rows="4" placeholder="Cuéntanos tu idea o propuesta" required></textarea>
                 <button type="submit" class="btn-primary">Enviar Mensaje</button>
             </form>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 Future Founders | Estudiantes Universidad Continental</p>
+        <p>&copy; 2026 Future Founders | Estudiantes Universidad Continental. Diseñado con precisión.</p>
     </footer>
 
     <script>
@@ -406,14 +487,14 @@
             const observerOptions = {
                 root: null,
                 rootMargin: '0px',
-                threshold: 0.15 // Se activa cuando el 15% del elemento es visible
+                threshold: 0.15 
             };
 
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
-                        observer.unobserve(entry.target); // Solo se anima una vez al bajar
+                        observer.unobserve(entry.target);
                     }
                 });
             }, observerOptions);
@@ -426,21 +507,20 @@
                ========================================= */
             const changingText = document.getElementById('changing-text');
             const words = ['Innovadora', 'Disruptiva', 'Digital', 'Escalable'];
-            const fonts = ["'Inter', sans-serif", "'Playfair Display', serif", "'Space Mono', monospace"];
+            // Se intercalan tipografías editoriales y tech para generar contraste
+            const fonts = ["'Merriweather', serif", "'Playfair Display', serif", "'Space Mono', monospace", "'Inter', sans-serif"];
             
             let wordIndex = 0;
             let fontIndex = 0;
 
             setInterval(() => {
-                // Cambiar palabra
                 wordIndex = (wordIndex + 1) % words.length;
                 changingText.textContent = words[wordIndex];
                 
-                // Cambiar tipografía
                 fontIndex = (fontIndex + 1) % fonts.length;
                 changingText.style.fontFamily = fonts[fontIndex];
                 
-            }, 2000); // Cambia la palabra y la fuente cada 2 segundos
+            }, 2500); 
 
         });
     </script>

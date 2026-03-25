@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future Founders | Universidad Continental</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:ital,wght@1,700&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* =========================================
+           VARIABLES GLOBALES
+           ========================================= */
+        :root {
+            --bg-color: #050505;
+            --text-color: #ffffff;
+            --text-muted: #a1a1aa;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --accent: #3b82f6; /* Azul tecnológico */
+        }
+
+        /* =========================================
+           RESET Y ESTILOS BASE
+           ========================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
+        .text-center { 
+            text-align: center; 
+        }
+
+        /* =========================================
+           EFECTO GLASSMORPHISM
+           ========================================= */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* =========================================
+           HERO SECTION
+           ========================================= */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        #changing-text {
+            color: var(--accent);
+            transition: font-family 0.3s ease;
+            display: inline-block;
+            min-width: 300px; /* Evita saltos de línea molestos */
+        }
+
+        /* =========================================
+           GRILLAS
+           ========================================= */
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        /* =========================================
+           TARJETAS DE EQUIPO
+           ========================================= */
+        .team-card {
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 2px solid var(--glass-border);
+        }
+
+        .role {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* =========================================
+           SECCIÓN UNIVERSIDAD
+           ========================================= */
+        .flex-split {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .split-left, .split-right {
+            flex: 1;
+        }
+
+        .img-wrapper {
+            padding: 10px;
+        }
+
+        .uni-img {
+            width: 100%;
+            border-radius: 15px;
+            display: block;
+        }
+
+        .uni-data {
+            margin-top: 20px;
+            list-style-position: inside;
+            color: var(--text-muted);
+        }
+
+        .uni-data li {
+            margin-bottom: 10px;
+        }
+
+        /* =========================================
+           TARJETAS DE BLOG / NOVEDADES
+           ========================================= */
+        .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--accent);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .blog-card h4 {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .blog-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* =========================================
+           FORMULARIO CTA
+           ========================================= */
+        .form-cta {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .cta-subtitle {
+            margin-bottom: 40px;
+            color: var(--text-muted);
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            color: var(--text-color);
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .btn-primary {
+            background: var(--text-color);
+            color: var(--bg-color);
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            background: #e4e4e7;
+            transform: scale(1.02);
+        }
+
+        /* =========================================
+           FOOTER
+           ========================================= */
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* =========================================
+           ANIMACIONES SCROLL (CLASES JS)
+           ========================================= */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================================
+           RESPONSIVE
+           ========================================= */
+        @media (max-width: 768px) {
+            .flex-split {
+                flex-direction: column;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            #changing-text {
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero section-padding">
+        <div class="hero-content fade-in">
+            <h1>Visión <span id="changing-text">Innovadora</span></h1>
+            <p>Transformando el futuro tecnológico desde cero.</p>
+        </div>
+    </header>
+
+    <section id="equipo" class="section-padding">
+        <div class="container fade-in">
+            <h2 class="section-title">Nuestro Equipo</h2>
+            <div class="grid-4">
+                
+                <div class="glass-card team-card">
+                    <img src="img/imagen-joaquin.png" alt="Ali Israel Astete Romero" class="profile-img">
+                    <h3>Ali Israel Astete Romero</h3>
+                    <p class="role">Estudiante U. Continental</p>
+                    <p class="desc">Especialista en arquitecturas de backend y procesamiento de datos. Apasionado por la inteligencia artificial aplicada a los negocios.</p>
+                </div>
+
+                <div class="glass-card team-card">
+                    <img src="img/imagen-joaquin.png" alt="Eliab Ezziel Zamalloa Cayo" class="profile-img">
+                    <h3>Eliab Ezziel Zamalloa Cayo</h3>
+                    <p class="role">Estudiante U. Continental</p>
+                    <p class="desc">Desarrollador Full Stack con enfoque en ciberseguridad. Encargado de mantener la integridad y escalabilidad de los sistemas.</p>
+                </div>
+
+                <div class="glass-card team-card">
+                    <img src="img/imagen-joaquin.png" alt="Terry Rolando Chauca" class="profile-img">
+                    <h3>Terry Rolando Chauca</h3>
+                    <p class="role">Estudiante U. Continental</p>
+                    <p class="desc">Experto en UX/UI e interfaces modernas. Su misión es crear experiencias digitales intuitivas, minimalistas y altamente funcionales.</p>
+                </div>
+
+                <div class="glass-card team-card">
+                    <img src="img/imagen-joaquin.png" alt="Ariana Molina" class="profile-img">
+                    <h3>Ariana Molina</h3>
+                    <p class="role">Estudiante U. Continental</p>
+                    <p class="desc">Gestora de proyectos ágiles y analista de mercado tecnológico. Coordina los esfuerzos del equipo para asegurar entregas de alto impacto.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="universidad" class="section-padding">
+        <div class="container flex-split fade-in">
+            <div class="split-left">
+                <div class="glass-card img-wrapper">
+                    <img src="img/edificio-continental.jpg" alt="Universidad Continental" class="uni-img">
+                </div>
+            </div>
+            <div class="split-right">
+                <h2 class="section-title">Nuestra Casa de Estudios</h2>
+                <p>La <strong>Universidad Continental</strong> es el ecosistema donde nuestra visión cobró vida. A través de su enfoque en la innovación y el emprendimiento, hemos logrado consolidar nuestras ideas en proyectos tangibles.</p>
+                <ul class="uni-data">
+                    <li>Sede central de nuestras operaciones académicas.</li>
+                    <li>Acceso a laboratorios de alta tecnología.</li>
+                    <li>Mentores y docentes de primer nivel.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="novedades" class="section-padding">
+        <div class="container fade-in">
+            <h2 class="section-title">Novedades y Blog Tech</h2>
+            <div class="grid-3">
+                
+                <div class="glass-card blog-card">
+                    <span class="tag">Desarrollo Web</span>
+                    <h4>El impacto de Web3 en Startups</h4>
+                    <p>En nuestra última investigación, Ali y Terry exploran cómo la descentralización está cambiando el panorama de las aplicaciones corporativas.</p>
+                </div>
+
+                <div class="glass-card blog-card">
+                    <span class="tag">Ciberseguridad</span>
+                    <h4>Protegiendo datos en 2026</h4>
+                    <p>Eliab comparte las prácticas fundamentales que hemos implementado para asegurar nuestros despliegues en la nube frente a nuevas amenazas.</p>
+                </div>
+
+                <div class="glass-card blog-card">
+                    <span class="tag">Gestión Ágil</span>
+                    <h4>De la idea al MVP en 30 días</h4>
+                    <p>Ariana documenta nuestro proceso de trabajo utilizando metodologías ágiles adaptadas a entornos académicos de alta exigencia.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" class="section-padding">
+        <div class="container fade-in text-center">
+            <h2 class="section-title">Únete a nuestra visión</h2>
+            <p class="cta-subtitle">¿Tienes un proyecto en mente? Hablemos.</p>
+            
+            <form class="glass-card form-cta" onsubmit="event.preventDefault(); alert('Mensaje enviado correctamente.');">
+                <input type="text" placeholder="Tu Nombre Completo" required>
+                <input type="email" placeholder="Correo Electrónico" required>
+                <textarea rows="4" placeholder="Cuéntanos tu idea" required></textarea>
+                <button type="submit" class="btn-primary">Enviar Mensaje</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Future Founders | Estudiantes Universidad Continental</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            /* =========================================
+               1. ANIMACIONES DE SCROLL (FADE-IN)
+               ========================================= */
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15 // Se activa cuando el 15% del elemento es visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // Solo se anima una vez al bajar
+                    }
+                });
+            }, observerOptions);
+
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(el => observer.observe(el));
+
+            /* =========================================
+               2. ANIMACIÓN TIPOGRÁFICA EN EL HERO
+               ========================================= */
+            const changingText = document.getElementById('changing-text');
+            const words = ['Innovadora', 'Disruptiva', 'Digital', 'Escalable'];
+            const fonts = ["'Inter', sans-serif", "'Playfair Display', serif", "'Space Mono', monospace"];
+            
+            let wordIndex = 0;
+            let fontIndex = 0;
+
+            setInterval(() => {
+                // Cambiar palabra
+                wordIndex = (wordIndex + 1) % words.length;
+                changingText.textContent = words[wordIndex];
+                
+                // Cambiar tipografía
+                fontIndex = (fontIndex + 1) % fonts.length;
+                changingText.style.fontFamily = fonts[fontIndex];
+                
+            }, 2000); // Cambia la palabra y la fuente cada 2 segundos
+
+        });
+    </script>
+</body>
+</html>
